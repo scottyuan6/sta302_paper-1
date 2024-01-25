@@ -8,28 +8,6 @@ toc: true
 number-sections: true
 bibliography: ref.bib
 ---
-```{r, echo=FALSE, warning=FALSE}
-#Simulation
-# Load necessary library
-library(ggplot2)
-
-# Create a data frame with the age cohorts and the count of arrests
-data <- data.frame(
-  AgeCohort = factor(c('<18', '18 to 24', '25 to 34', '35 to 44', '45 to 54', '55 to 64', '65+', 'Unknown'), 
-                     levels = c('<18', '18 to 24', '25 to 34', '35 to 44', '45 to 54', '55 to 64', '65+', 'Unknown')),
-  CountOfArrests = c(12000, 25000, 28000, 27000, 20000, 13000, 7000, 3000)
-)
-
-# Create the bar plot
-ggplot(data, aes(x=AgeCohort, y=CountOfArrests, fill=AgeCohort)) + 
-  geom_bar(stat="identity", color="black", fill="black") +
-  theme_minimal() +
-  labs(title="Figure 1: Age Cohort Distribution of Arrests",
-       x="Age Cohort",
-       y="Count of Arrests") +
-  theme(legend.position="none")
-
-```
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -80,11 +58,6 @@ ggplot(arrested_data, aes(x = AGE_COHORT)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
-```{r, echo=FALSE, warning=FALSE}
-arrested_data$AGE_COHORT |>class() == "character"
-arrested_data$ARREST_COUNT |>class() == "integer"
-```
-
 The first graph, Figure 1 in our series is a histogram depicting the age distribution of arrestees. It is generalized using ggplot[@wickham2016ggplot2]. The histogram categorizes arrestees into age groups such as "18 to 24," "25 to 34," "35 to 44," and so on. The height of each bar in the histogram correlates with the number of arrests in that particular age group. Preliminary observations indicate that the frequency of arrests is higher in the "25 to 34 years" age group, followed by the "18 to 24 years" and "35 to 44 years" age groups. This trend highlights the need to develop targeted policing strategies for these age groups.
 
 However, it is crucial to relate these findings to the broader composition of the population. Without considering the age distribution of the total population, a bar chart perspective alone is limited. Additionally, while the bar chart effectively highlights age groups with higher arrest rates, it does not distinguish between the nature or type of crime involved. This information gap limits the depth of our analysis and necessitates further examination of the specific types of offenses associated with each age group. 
@@ -111,6 +84,7 @@ ggplot(arrested_sex, aes(x = "", y = n, fill = SEX)) +
         axis.ticks = element_blank(),
         panel.grid = element_blank())
 ```
+
 Figure 2 is a pie chart made with ggplot[@wickham2016ggplot2] and Dplyr[@wickham2022dplyr]. As can be seen from the chart, there is a clear dominance of males among those arrested, with males accounting for 70.35% of the 91,010 recorded cases. This preponderance highlights a clear gender imbalance in criminal activity, with male offenders far outnumbering female offenders. The number of arrests of females is about half of the number of arrests of males, which highlights the significant gender disparity in crime. An interesting aspect of the chart is the inclusion of an "unknown" category, which represents 0.31% of arrests. This category indicates that the gender of the offender is either binary or unrecorded. Males are overrepresented in criminal arrests compared to females. This discrepancy calls for gender-specific strategies in crime prevention and policing that may need to be adopted by law enforcement agencies. The overrepresentation of males in criminal activities may reflect underlying social or environmental factors that merit separate research and investigation.
 
 The final figure in our sequence is a stacked bar chart showing the distribution of arrestees across different crime categories, further broken down by gender. This visualization allows us to examine the relationship between crime type and the gender of arrestees. Each bar in the chart represents a particular crime category, and the paragraphs in the bars show the proportion of male and female arrestees in that category.
